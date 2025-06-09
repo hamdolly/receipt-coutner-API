@@ -27,7 +27,7 @@ export const login = async (e_No, password) => {
         data.push(
             {
                 "ID": result[0].e_No,
-                "passowrd": result[0].passowrd
+                "password": result[0].password
             }
         )
         :
@@ -38,7 +38,7 @@ export const login = async (e_No, password) => {
             }
         )
     return {
-        result: data[0].passowrd == password ? data : "ID or password is wrong!"
+        result: data[0].password == password ? data : "ID or password is wrong!"
     }
 }
 
