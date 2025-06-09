@@ -1,0 +1,9 @@
+
+employee:
+
+ID, employee name, employee arabic name, employee number, position, shift, gender, check ID
+
+
+receipt: 
+
+ID, employee ID, customer number, earned points proprity, date 
