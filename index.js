@@ -1,6 +1,6 @@
 import express from "express"
-import cors from "cors"
 import * as info from "./info.js"
+import cors from "cors"
 
 const app = express()
 

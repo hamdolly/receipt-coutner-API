@@ -11,6 +11,7 @@ const pool = mysql.createPool({
     user: 'sql12763292',
     password: 'tyvfHRcTGP',
     database: 'sql12763292'
+
 }).promise()
 
 export const checkCustomerNo = async (customer_No) => {
