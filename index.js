@@ -9,7 +9,7 @@ let corsOptions = {
     origin : ['https://receipt-counter.w3spaces.com'],
  }
 
-app.use(cors(corsOptions));
+//app.use(cors(corsOptions));
 
 app.get("/", (req, res) => {
     res.send("It is work!")
