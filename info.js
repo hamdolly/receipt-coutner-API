@@ -56,22 +56,15 @@ export const addNewReceipt = async (e_No, customer_No, ep, date, supervisor) => 
 
 export const getAllEmployeesReceiptsQuantity = async () => {
     var data = []
-    var [employee] = await pool.query(`SELECT * FROM employees`)
-    var result, resultY, resultN;
+    var [employee] = await pool.query(`SELECT * FROM employees WHERE BLOCK = 0`)
+    var result, resultP;
     for (var i = 0; i < employee.length; i++) {
         [result] = await pool.query(`SELECT COUNT(*) AS receipts FROM receipt WHERE e_No = ${employee[i].ID} AND BLOCK = 0`);
-        [resultY] = await pool.query(`SELECT COUNT(*) AS receipts FROM receipt WHERE e_No = ${employee[i].ID} AND earning_point = 1 AND BLOCK = 0`);
-        [resultN] = await pool.query(`SELECT COUNT(*) AS receipts FROM receipt WHERE e_No = ${employee[i].ID} AND earning_point = 0 AND BLOCK = 0`);
-
-        data.push(
-            {
-                "ID": employee[i].ID,
-                "employee": employee[i].AName,
-                "pointsY": resultY[0].receipts,
-                "pointsN": resultN[0].receipts,
-                "quantity": result[0].receipts,
-            }
-        )
+        [resultP] = await pool.query(`SELECT COUNT(*) AS receipt FROM receipt WHERE e_No = ${employee[i].ID} AND BLOCK = 0 GROUP BY earning_point;`);
+        var y, n
+        resultP[0]?.receipt == undefined ? n = 0 : n = resultP[0].receipt
+        resultP[1]?.receipt == undefined ? y = 0 : y = resultP[1].receipt
+        data.push({"ID": employee[i].ID,"employee": employee[i].AName,"pointsY": y,"pointsN": n,"quantity": result[0].receipts,})
     }
     return data
 }
