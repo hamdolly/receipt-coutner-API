@@ -10,7 +10,7 @@ app.use(express.json());
 //  }
 
 app.use(cors({
-    origin: "https://receipt-counter.w3spaces.com/",
+    origin: "*",
 }));
 
 app.get("/", (req, res) => {
